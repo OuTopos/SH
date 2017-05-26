@@ -7,13 +7,13 @@ func _ready():
 	set_process(true)
 	set_process_input(true)
 	
-	var tiles = []
-	for i in range(36):
-		tiles.append(i)
-		tiles.append(i)
-		tiles.append(i)
-		tiles.append(i)
-	print(tiles)
+	var shuffled_tiles = get_node("/root/Tiles").get_shuffled_tiles(1337)
+	print(shuffled_tiles)
+	var i = 0
+	for child in get_node("Tiles").get_children():
+		var value = shuffled_tiles[i]
+		child.set_value(value)
+		i += 1
 	
 
 func _process(delta):
@@ -22,6 +22,4 @@ func _process(delta):
 func _input(event):
 	if event.type == InputEvent.MOUSE_MOTION:
 		var offset = (event.pos - center) / center
-		pivot.set_rotation_deg(Vector3(20 * offset.y, 0, 20 * - offset.x))
-		
-
+		pivot.set_rotation_deg(Vector3(50 * offset.y, 0, 50 * - offset.x))
