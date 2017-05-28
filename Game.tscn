@@ -1,49 +1,15 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://Tile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Camera Movement.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Tile.tscn" type="PackedScene" id=3]
 
 [node name="Game" type="Spatial"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 1 )
 
-[node name="InterpolatedCamera" type="InterpolatedCamera" parent="."]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 25, 0 )
-projection = 0
-fov = 60.0
-near = 0.1
-far = 100.0
-keep_aspect = 1
-current = true
-visible_layers = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
-target = NodePath("../Pivot/Camera")
-speed = 15.0
-enabled = true
-
-[node name="Pivot" type="Spatial" parent="."]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-
-[node name="Camera" type="Camera" parent="Pivot"]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 25, 0 )
-projection = 0
-fov = 60.0
-near = 0.1
-far = 100.0
-keep_aspect = 1
-current = false
-visible_layers = 1048575
-environment = null
-h_offset = 0.0
-v_offset = 0.0
+[node name="Camera Movement" parent="." instance=ExtResource( 2 )]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 
@@ -76,259 +42,259 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
-[node name="Tile" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -8 )
 
-[node name="Tile8" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile8" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -5 )
 
-[node name="Tile9" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3 )
 
-[node name="Tile10" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile10" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -1 )
 
-[node name="Tile11" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile11" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 1 )
 
-[node name="Tile12" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile12" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 3 )
 
-[node name="Tile13" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile13" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5 )
 
-[node name="Tile14" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile14" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 7 )
 
-[node name="Tile1" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile1" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -7 )
 
-[node name="Tile8 4" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile8 4" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5 )
 
-[node name="Tile85" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile85" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3 )
 
-[node name="Tile90 5" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile90 5" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -1 )
 
-[node name="Tile906" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile906" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 1 )
 
-[node name="Tile909 3" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile909 3" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3 )
 
-[node name="Tile9094" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9094" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5 )
 
-[node name="Tile9098 4" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9098 4" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 7 )
 
-[node name="Tile2" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile2" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -7 )
 
-[node name="Tile8 8" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile8 8" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -5 )
 
-[node name="Tile89" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile89" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3 )
 
-[node name="Tile90 3" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile90 3" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1 )
 
-[node name="Tile904" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile904" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 1 )
 
-[node name="Tile909" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile909" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3 )
 
-[node name="Tile910" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile910" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 5 )
 
-[node name="Tile911" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile911" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 7 )
 
-[node name="Tile3" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile3" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -7 )
 
-[node name="Tile8 7" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile8 7" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5 )
 
-[node name="Tile88" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile88" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -3 )
 
-[node name="Tile90 4" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile90 4" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
 
-[node name="Tile905" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile905" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1 )
 
-[node name="Tile909 5" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile909 5" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3 )
 
-[node name="Tile9096" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9096" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 5 )
 
-[node name="Tile9098 3" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9098 3" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 7 )
 
-[node name="Tile4" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile4" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -7 )
 
-[node name="Tile8 6" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile8 6" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5 )
 
-[node name="Tile87" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile87" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3 )
 
-[node name="Tile90 7" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile90 7" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1 )
 
-[node name="Tile908" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile908" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1 )
 
-[node name="Tile909 4" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile909 4" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3 )
 
-[node name="Tile9095" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9095" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5 )
 
-[node name="Tile9098 2" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9098 2" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 7 )
 
-[node name="Tile5" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile5" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -7 )
 
-[node name="Tile8 3" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile8 3" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5 )
 
-[node name="Tile84" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile84" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3 )
 
-[node name="Tile90 2" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile90 2" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -1 )
 
-[node name="Tile903" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile903" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1 )
 
-[node name="Tile909 6" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile909 6" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3 )
 
-[node name="Tile9097" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9097" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5 )
 
-[node name="Tile9098 5" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9098 5" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 7 )
 
-[node name="Tile6" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile6" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -7 )
 
-[node name="Tile8 2" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile8 2" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5 )
 
-[node name="Tile83" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile83" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3 )
 
-[node name="Tile90 6" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile90 6" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1 )
 
-[node name="Tile907" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile907" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1 )
 
-[node name="Tile909 2" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile909 2" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3 )
 
-[node name="Tile9093" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9093" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5 )
 
-[node name="Tile9098" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile9098" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 7 )
 
-[node name="Tile7" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile7" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -7 )
 
-[node name="Tile8 5" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile8 5" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -5 )
 
-[node name="Tile86" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile86" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -3 )
 
-[node name="Tile90" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile90" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -1 )
 
-[node name="Tile91" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile91" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1 )
 
-[node name="Tile92" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile92" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3 )
 
-[node name="Tile93" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile93" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5 )
 
-[node name="Tile94" parent="Tiles" instance=ExtResource( 2 )]
+[node name="Tile94" parent="Tiles" instance=ExtResource( 3 )]
 
 transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7 )
 
