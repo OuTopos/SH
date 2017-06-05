@@ -78,7 +78,7 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="TestCube" type="TestCube" parent="."]
+[node name="Visual" type="TestCube" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 layers = 1
@@ -96,7 +96,7 @@ geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
 
-[node name="Front" type="Sprite3D" parent="TestCube"]
+[node name="Front" type="Sprite3D" parent="Visual"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, 1.01 )
@@ -132,7 +132,7 @@ frame = 0
 region = false
 region_rect = Rect2( 0, 0, 0, 0 )
 
-[node name="Back" type="Sprite3D" parent="TestCube"]
+[node name="Back" type="Sprite3D" parent="Visual"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 0.22, 0, 0, 0, 0.22, 0, 0, 0, 0.22, 0, 0, -1.01 )
@@ -168,7 +168,7 @@ frame = 0
 region = false
 region_rect = Rect2( 0, 0, 0, 0 )
 
-[node name="Right" type="Sprite3D" parent="TestCube"]
+[node name="Right" type="Sprite3D" parent="Visual"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( -9.6165e-09, 0, 0.22, 0, 0.22, 0, -0.22, 0, -9.6165e-09, 1.01, 0, 0 )
@@ -204,7 +204,7 @@ frame = 0
 region = false
 region_rect = Rect2( 0, 0, 0, 0 )
 
-[node name="Left" type="Sprite3D" parent="TestCube"]
+[node name="Left" type="Sprite3D" parent="Visual"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( -9.6165e-09, 0, 0.22, 0, 0.22, 0, -0.22, 0, -9.6165e-09, -1.01, 0, 0 )
