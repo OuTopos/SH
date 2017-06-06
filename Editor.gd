@@ -5,11 +5,13 @@ var editor_tile = preload("res://Editor/Editor Tile.tscn")
 onready var ghost = get_node("Ghost")
 onready var layout = get_node("Layout")
 
-var snap = Vector3(0.75, 0.5, 1)
+
 var pressed = false
 
 var placed_tiles = 0
 
+var tile_size  = Vector3(1.5, 1, 2)
+var snap = tile_size / Vector3(2, 1, 2)
 func _ready():
 	set_fixed_process(true)
 	
@@ -27,14 +29,15 @@ func _fixed_process(delta):
 func move_ghost(pos):
 	var old_pos = ghost.get_translation()
 	pos.x = round(pos.x / snap.x) * snap.x
-	pos.y = round(pos.y / snap.y) * snap.y + snap.y
+	pos.y = round(pos.y / snap.y) * snap.y
 	pos.z = round(pos.z / snap.z) * snap.z
+	print("pos: " + str(pos) + " grid: " + str(pos / tile_size))
 	ghost.set_translation(pos)
 	
 	var cols = ghost.get_overlapping_bodies().size()
 	print(cols)
-	for poop in ghost.get_overlapping_bodies():
-		print(poop)
+	#for poop in ghost.get_overlapping_bodies():
+		#print(poop)
 	#if cols > 1:
 		#ghost.set_translation(old_pos)
 
@@ -62,7 +65,45 @@ func _on_input_event( camera, event, pos, normal, shape_idx ):
 			
 			place_tile(ghost.get_translation())
 
+#SAVING
+
+func _on_Save_button_up():
+	print("SAVING")
+	var tiles = Array()
+	for child in layout.get_children():
+		var tile = {"x": child.get_translation().x, "y": child.get_translation().y, "z": child.get_translation().z}
+		tiles.append(tile)
+	var json = {"tiles": tiles}.to_json()
+	print(json)
+	var test = Dictionary()
+	test.parse_json(json)
 	
+	var filename = get_node("Control/Filename").get_text()
+	var file = File.new()
+	file.open("user://" + filename + ".json", File.WRITE)
+	file.store_line(json)
+	file.close()
+
+
+func _on_Save1_button_up():
+	print("SAVING with tilesize")
+	var tiles = Array()
+	for child in layout.get_children():
+		var tile = {"x": child.get_translation().x / tile_size.x, "y": child.get_translation().y / tile_size.y, "z": child.get_translation().z / tile_size.z}
+		tiles.append(tile)
+		print(tile)
+	var json = {"tiles": tiles}.to_json()
+	print(json)
+	var test = Dictionary()
+	test.parse_json(json)
+	
+	var filename = get_node("Control/Filename").get_text()
+	var file = File.new()
+	file.open("user://" + filename + ".json", File.WRITE)
+	file.store_line(json)
+	file.close()
+	
+ # LOADING
 func _on_Load_button_up():
 	print("LOADING")
 	for child in layout.get_children():
@@ -85,27 +126,33 @@ func _on_Load_button_up():
 				i += 1
 			if i > 1:
 				print("poop")
-		place_tile(Vector3(tile.x, tile.y, tile.z))
+		place_tile(Vector3(tile.x, tile.y - snap.y, tile.z))
 	
 	print(str(tiles.size()) + " tiles loaded.")
 
-	
-	
-
-
-func _on_Save_button_up():
-	print("SAVING")
-	var tiles = Array()
+func _on_Load1_button_up():
+	print("LOADING")
 	for child in layout.get_children():
-		var tile = {"x": child.get_translation().x, "y": child.get_translation().y, "z": child.get_translation().z}
-		tiles.append(tile)
-	var json = {"tiles": tiles}.to_json()
-	print(json)
-	var test = Dictionary()
-	test.parse_json(json)
-	
+		child.queue_free()
+		
+		
 	var filename = get_node("Control/Filename").get_text()
 	var file = File.new()
-	file.open("user://" + filename + ".json", File.WRITE)
-	file.store_line(json)
+	file.open("user://" + filename + ".json", File.READ)
+	var json = file.get_as_text()
+	var dict = Dictionary()
+	dict.parse_json(json)
+	var tiles = dict["tiles"]
 	file.close()
+	
+	for tile in tiles:
+		for tile2 in tiles:
+			var i = 0
+			if Vector3(tile.x, tile.y, tile.z) == Vector3(tile2.x, tile2.y, tile2.z):
+				i += 1
+			if i > 1:
+				print("poop")
+		place_tile(Vector3(tile.x * tile_size.x, tile.y * tile_size.y, tile.z * tile_size.z))
+		print(tile)
+	
+	print(str(tiles.size()) + " tiles loaded.")

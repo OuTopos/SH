@@ -4,7 +4,7 @@
 
 [sub_resource type="BoxShape" id=1]
 
-extents = Vector3( 0.65, 0.4, 0.9 )
+extents = Vector3( 0.75, 0.5, 1 )
 
 [sub_resource type="FixedMaterial" id=2]
 
@@ -51,7 +51,7 @@ input/ray_pickable = true
 input/capture_on_drag = false
 shape_count = 1
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -75,6 +75,7 @@ damp_override/angular = -1.0
 [node name="CollisionShape" type="CollisionShape" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -82,7 +83,7 @@ _update_shape_index = 0
 [node name="TestCube" type="TestCube" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.75, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0.75, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.5, 0 )
 layers = 1
 geometry/visible = true
 geometry/material_override = SubResource( 2 )

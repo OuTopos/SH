@@ -231,13 +231,29 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 12.0
-margin/bottom = 20.0
+margin/right = 144.0
+margin/bottom = 76.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Save"
 icon = ExtResource( 4 )
+flat = false
+
+[node name="Save1" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 151.0
+margin/top = 0.0
+margin/right = 295.0
+margin/bottom = 76.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Save (Tile)"
 flat = false
 
 [node name="Load" type="Button" parent="Control"]
@@ -247,14 +263,30 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 70.0
-margin/right = 108.0
-margin/bottom = 140.0
+margin/top = 80.0
+margin/right = 145.0
+margin/bottom = 156.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Load"
 icon = ExtResource( 4 )
+flat = false
+
+[node name="Load1" type="Button" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 151.0
+margin/top = 80.0
+margin/right = 296.0
+margin/bottom = 156.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Load (Tile)"
 flat = false
 
 [node name="Filename" type="LineEdit" parent="Control"]
@@ -264,9 +296,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 140.0
-margin/right = 198.0
-margin/bottom = 164.0
+margin/top = 160.0
+margin/right = 300.0
+margin/bottom = 205.0
 text = "layout"
 placeholder/alpha = 0.6
 focus_mode = 2
@@ -277,6 +309,10 @@ caret/caret_blink_speed = 0.65
 
 [connection signal="button_up" from="Control/Save" to="." method="_on_Save_button_up"]
 
+[connection signal="button_up" from="Control/Save1" to="." method="_on_Save1_button_up"]
+
 [connection signal="button_up" from="Control/Load" to="." method="_on_Load_button_up"]
+
+[connection signal="button_up" from="Control/Load1" to="." method="_on_Load1_button_up"]
 
 
