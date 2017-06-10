@@ -1,15 +1,17 @@
 extends Spatial
 
-var tile_size  = Vector3(1.5, 1, 2)
+onready var tile_size  = get_node("/root/Tiles").tile_size
 
 
 var moves = Array()
+var selected = null
 
 var tile_scene = preload("res://Tile.tscn")
 onready var layout_node = get_node("Layout")
 
 func _ready():
 	set_process(true)
+	
 
 func load_layout(layout_name):
 	var file_path = "res://Layouts/" + layout_name + ".json"
@@ -31,7 +33,10 @@ func load_layout(layout_name):
 		
 		var tile_node = tile_scene.instance()
 		tile_node.set_translation(Vector3(tile.x * tile_size.x, tile.y * tile_size.y, tile.z * tile_size.z))
+		tile_node.connect("clicked", self, "_on_Tile_clicked")
 		layout_node.add_child(tile_node)
+		
+		
 		tile_node.hide()
 		tile_node.delay = i * 0.03
 		#tile_node.place(i * 0.05)
@@ -40,7 +45,30 @@ func load_layout(layout_name):
 		
 	var placed_tiles = layout_node.get_child_count()
 	print(str(placed_tiles) + " tiles loaded.")
-
+	
+func _on_Tile_clicked(tile):
+	print("yes clicked")
+	if tile.blocked:
+		print("BLOCKED")
+	elif not tile.selected:
+		if selected:
+			if tile.value == selected.value:
+				tile.queue_free()
+				selected.queue_free()
+				selected = null
+				
+				get_tree().call_group(0, "Tiles", "update_blocked")
+			else:
+				selected.selected = false
+				selected = null
+		else:
+			tile.selected = true
+			selected = tile
+			print("SELECTING")
+	elif tile.selected:
+		print("DESELECTING")
+	print(tile)
+	
 func _on_Start_button_up():
 	load_layout("turtle")
 	

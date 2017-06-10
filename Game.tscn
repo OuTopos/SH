@@ -51,12 +51,35 @@ script/script = ExtResource( 1 )
 
 [node name="Camera Movement" parent="." instance=ExtResource( 2 )]
 
+[node name="OmniLight" type="OmniLight" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 0.348998, 0.937124, 0, -0.937124, 0.348998, -40, 35.9123, -2.14617 )
+layers = 1
+params/enabled = true
+params/editor_only = false
+params/bake_mode = 0
+params/energy = 1.0
+colors/diffuse = Color( 1, 1, 1, 1 )
+colors/specular = Color( 1, 1, 1, 1 )
+shadow/shadow = false
+shadow/darkening = 0.0
+shadow/z_offset = 0.001
+shadow/z_slope_scale = 0.0
+shadow/esm_multiplier = 60.0
+shadow/blur_passes = 1.0
+projector = null
+operator = 0
+params/radius = 200.0
+params/attenuation = 1.0
+
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform/local = Transform( 1, 0, 0, 0, 0.348998, 0.937124, 0, -0.937124, 0.348998, 0, 13.1623, 9.10383 )
+visibility/visible = false
 layers = 1
-params/enabled = true
+params/enabled = false
 params/editor_only = false
 params/bake_mode = 0
 params/energy = 1.0
@@ -85,7 +108,7 @@ __meta__ = {
 [node name="TestCube" type="TestCube" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 16, 0, 0, 0, 1, 0, 0, 0, 16, 0, -1, 0 )
+transform/local = Transform( 25, 0, 0, 0, 1, 0, 0, 0, 25, 0, -1, 0 )
 layers = 1
 geometry/visible = true
 geometry/material_override = SubResource( 1 )
@@ -177,6 +200,49 @@ shortcut = null
 text = "asd"
 flat = false
 align = 0
+
+[node name="SpotLight" type="SpotLight" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0.906308, -0.365998, 0.211309, 0, 0.5, 0.866025, -0.422618, -0.784886, 0.453154, 13.75, 50.25, 22.5 )
+layers = 1
+params/enabled = true
+params/editor_only = false
+params/bake_mode = 0
+params/energy = 8.69
+colors/diffuse = Color( 1, 1, 1, 1 )
+colors/specular = Color( 1, 1, 1, 1 )
+shadow/shadow = false
+shadow/darkening = 0.0
+shadow/z_offset = 0.05
+shadow/z_slope_scale = 0.0
+shadow/esm_multiplier = 60.0
+shadow/blur_passes = 1.0
+projector = null
+operator = 0
+params/radius = 68.6158
+params/attenuation = 1.0
+params/spot_angle = 33.5786
+params/spot_attenuation = 1.0
+
+[node name="TestCube 2" type="TestCube" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, 10.75 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
 
 [connection signal="button_up" from="PanelContainer/HSplitContainer/Start" to="." method="_on_Start_button_up"]
 

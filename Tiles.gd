@@ -8,7 +8,7 @@ var textures = []
 	
 	
 	
-var tile_size  = Vector3(1.5, 1, 2)
+var tile_size  = Vector3(2.6, 1.9, 3.4)
 var snap_steps = 2
 var split = tile_size / Vector3(snap_steps*2, snap_steps*2, snap_steps*2)
 
