@@ -47,11 +47,13 @@ func _ready():
 		tiles.append(i)
 		tiles.append(i)
 		textures.append(load("res://Tiles/" + str(i) + ".png"))
-	print(tiles)
 
 
-func get_shuffled_tiles(new_seed):
-	seed(new_seed)
+func get_shuffled_tiles(new_seed = null):
+	if new_seed:
+		seed(new_seed)
+	else:
+		randomize()
 	
 	var shuffled_tiles = Array()
 	for i in range(tiles.size()):

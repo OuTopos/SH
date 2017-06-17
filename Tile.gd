@@ -5,6 +5,7 @@ extends RigidBody
 signal clicked(tile)
 
 var value = null
+var active = false
 
 
 # Member variables
@@ -29,14 +30,9 @@ onready var visual_node = get_node("Visual")
 
 onready var global_tiles_node = get_node("/root/Tiles")
 
-var translation_offset = Vector3(0, 0, 0)
-var rotation_offset = Vector3(0, 0, 0)
-var scale_mod = Vector3(0.9, 0.9, 0.9)
-
 func _ready():
 	set_process(true)
 	set_fixed_process(true)
-	
 	
 	free_mat.set_parameter(FixedMaterial.PARAM_DIFFUSE, Color(0.4, 0.7, 0.4, 1))
 	selected_mat.set_parameter(FixedMaterial.PARAM_DIFFUSE, Color(0.16, 0.56, 0.91, 1))
@@ -59,10 +55,7 @@ func _ready():
 		draw.end()
 
 func _process(delta):
-	timer += delta
-	if not placed and timer >= delay:
-		visual_animate_place(0.4)
-		placed = true
+	pass
 		
 func _fixed_process(delta):
 	if should_test:
@@ -74,30 +67,15 @@ func update_blocked():
 
 func _input_event(camera, event, pos, normal, shape):
 	if (event.type==InputEvent.MOUSE_BUTTON and event.pressed):
-		print("clicked")
 		emit_signal("clicked", self)
-		print(get_visual_rotation())
-		#if not selected and not blocked:
-		#	selected = true
-		#	print("selected")
-		#elif not blocked:
-		#	selected = false
-		#	print("unselected")
-		#else:
-		#	get_node("Visual/TestCube").set_material_override(null)
-		#	#queue_free()
-		#	set_collision_mask(0)
-		#	set_layer_mask(0)
-		#	hide()
-		#	get_tree().call_group(0, "Tiles", "test2")
-
 
 func _mouse_enter():
-	visual_animate_mouse_enter(0.1)
-
+	if active:
+		visual_animate_mouse_enter(0.1)
 
 func _mouse_exit():
-	visual_animate_mouse_exit(0.2)
+	if active:
+		visual_animate_mouse_exit(0.2)
 
 func set_selected(b):
 	selected = b
@@ -147,9 +125,9 @@ func get_visual_translation():
 	return Vector3(x, y, z)
 
 func get_visual_rotation():
-	var x = randf()*0.5-0.25
+	var x = randf()*1-0.5
 	var y = randf()*2-1
-	var z = randf()*0.5-0.25
+	var z = randf()*1-0.5
 	return Vector3(x, y, z)
 
 func get_visual_scale():
@@ -158,50 +136,50 @@ func get_visual_scale():
 	var z = 0.97
 	return Vector3(x, y, z)
 	
-func place(pos):
+func place(pos, delay):
+	# Setting the rigid body position.
 	set_translation(pos)
-	visual_node.set_translation(Vector3(0, 25, 0))
 	
-	
-	#visual_node.set_translation(get_visual_translation())
-	#visual_node.set_rotation_deg(get_visual_rotation())
+	# Preparing the visual node for animation.
+	var poop = Vector2(pos.x*randf()*0.5, pos.z*randf()*0.5).normalized() * Vector2(25, 25)
+	visual_node.set_translation(Vector3(poop.x, 20, poop.y))
 	visual_node.set_scale(get_visual_scale())
+	visual_animate_place(0.5, delay)
+	
+	active = true
 
 
 	
-func visual_animate_mouse_enter(time):
-	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), visual_node.get_translation() + Vector3(0, 1, 0), time, Tween.TRANS_SINE, Tween.EASE_OUT)
-	tween_node.start()
-	
-	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), Vector3(0, 0, 0), time, Tween.TRANS_SINE, Tween.EASE_OUT)
+func visual_animate_mouse_enter(time, delay = 0):
+	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), visual_node.get_translation() + Vector3(0, 1, 0), time, Tween.TRANS_SINE, Tween.EASE_OUT, delay)
+	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), get_visual_rotation(), time, Tween.TRANS_SINE, Tween.EASE_OUT, delay)
 	tween_node.start()
 
-func visual_animate_mouse_exit(time):
-	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), get_visual_translation(), time, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+func visual_animate_mouse_exit(time, delay = 0):
+	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), get_visual_translation(), time, Tween.TRANS_BOUNCE, Tween.EASE_OUT, delay)
+	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), get_visual_rotation(), time, Tween.TRANS_SINE, Tween.EASE_OUT, delay)
 	tween_node.start()
 	
-	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), get_visual_rotation(), time, Tween.TRANS_SINE, Tween.EASE_OUT)
+func visual_animate_place(time, delay = 0):
+	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), get_visual_translation(), time, Tween.TRANS_QUART, Tween.EASE_OUT, delay)
+	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), get_visual_rotation(), time, Tween.TRANS_SINE, Tween.EASE_OUT, delay)
 	tween_node.start()
 	
-func visual_animate_place(time):
-	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), get_visual_translation(), time, Tween.TRANS_SINE, Tween.EASE_OUT)
-	tween_node.start()
+func visual_animate_remove(time, delay = 0):
+	var pos = get_translation()
+	var poop = Vector2(pos.x*randf()*0.5, pos.z*randf()*0.5).normalized() * Vector2(25, 25)
 	
-	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), get_visual_rotation(), time, Tween.TRANS_SINE, Tween.EASE_OUT)
-	tween_node.start()
-	
-func visual_animate_remove(time):
-	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), get_visual_translation() + Vector3(0, 25, 0), time, Tween.TRANS_SINE, Tween.EASE_OUT)
-	tween_node.start()
-	
-	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), get_visual_rotation(), time, Tween.TRANS_SINE, Tween.EASE_OUT)
+	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), Vector3(poop.x, 20, poop.y), time, Tween.TRANS_QUINT, Tween.EASE_IN, delay)
+	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), get_visual_rotation(), time, Tween.TRANS_QUINT, Tween.EASE_IN, delay)
 	tween_node.start()
 
-func enable():
-	visual_animate_place(0.4)
+func activate():
+	active = true
 	set_layer_mask(1)
+	visual_animate_place(0.4)
 	
-func disable():
-	visual_animate_remove(0.4)
+func deactivate():
+	active = false
 	set_layer_mask(0)
+	visual_animate_remove(0.4)
 	set_selected(false)
