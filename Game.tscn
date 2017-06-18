@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://Camera Movement.tscn" type="PackedScene" id=2]
-[ext_resource path="res://steel_diffuse.png" type="Texture" id=3]
-[ext_resource path="res://steel_normal.png" type="Texture" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Camera Movement.tscn" type="PackedScene" id=3]
+[ext_resource path="res://steel_diffuse.png" type="Texture" id=4]
+[ext_resource path="res://steel_normal.png" type="Texture" id=5]
 
 [sub_resource type="FixedMaterial" id=1]
 
@@ -33,14 +34,14 @@ params/shader_param = 0.5
 params/glow = 0
 params/point_size = 1.0
 uv_xform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-textures/diffuse = ExtResource( 3 )
+textures/diffuse = ExtResource( 4 )
 textures/diffuse_tc = 0
 textures/detail_tc = 0
 textures/specular_tc = 0
 textures/emission_tc = 0
 textures/specular_exp_tc = 0
 textures/glow_tc = 0
-textures/normal = ExtResource( 4 )
+textures/normal = ExtResource( 5 )
 textures/normal_tc = 0
 textures/shade_param_tc = 0
 
@@ -48,6 +49,7 @@ textures/shade_param_tc = 0
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 1 )
+cursor = ExtResource( 2 )
 
 [node name="Second" type="Timer" parent="."]
 
@@ -56,7 +58,7 @@ wait_time = 1.0
 one_shot = false
 autostart = true
 
-[node name="Camera Movement" parent="." instance=ExtResource( 2 )]
+[node name="Camera Movement" parent="." instance=ExtResource( 3 )]
 
 [node name="Layout" type="Spatial" parent="."]
 
@@ -157,7 +159,6 @@ geometry/baked_light_tex_id = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 
-editor/display_folded = true
 anchor/right = 1
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -280,7 +281,7 @@ margin/right = 1892.0
 margin/bottom = 78.0
 alignment = 0
 
-[node name="Start" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer 2"]
+[node name="Undo" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer 2"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -288,24 +289,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 76.0
-margin/bottom = 45.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "Start"
-flat = false
-align = 0
-
-[node name="Undo" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer 2"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 84.0
-margin/top = 0.0
-margin/right = 167.0
+margin/right = 83.0
 margin/bottom = 45.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -320,9 +304,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 175.0
+margin/left = 91.0
 margin/top = 0.0
-margin/right = 244.0
+margin/right = 160.0
 margin/bottom = 45.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -337,9 +321,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 252.0
+margin/left = 168.0
 margin/top = 0.0
-margin/right = 352.0
+margin/right = 268.0
 margin/bottom = 45.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -354,9 +338,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 360.0
+margin/left = 276.0
 margin/top = 10.0
-margin/right = 419.0
+margin/right = 335.0
 margin/bottom = 35.0
 text = "Seed:"
 percent_visible = 1.0
@@ -369,9 +353,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 427.0
+margin/left = 343.0
 margin/top = 0.0
-margin/right = 591.0
+margin/right = 507.0
 margin/bottom = 45.0
 text = "0"
 placeholder/alpha = 0.6
@@ -385,9 +369,9 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 599.0
+margin/left = 515.0
 margin/top = 0.0
-margin/right = 700.0
+margin/right = 616.0
 margin/bottom = 45.0
 toggle_mode = false
 enabled_focus_mode = 2
@@ -398,8 +382,8 @@ align = 0
 
 [connection signal="timeout" from="Second" to="." method="_on_Second_timeout"]
 
-[connection signal="button_up" from="PanelContainer/VBoxContainer/HBoxContainer 2/Start" to="." method="_on_Start_button_up"]
-
 [connection signal="button_up" from="PanelContainer/VBoxContainer/HBoxContainer 2/Undo" to="." method="_on_Undo_button_up"]
+
+[connection signal="button_up" from="PanelContainer/VBoxContainer/HBoxContainer 2/Restart" to="." method="_on_Restart_button_up"]
 
 

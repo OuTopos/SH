@@ -2,6 +2,8 @@ extends Spatial
 
 onready var tile_size  = get_node("/root/Tiles").tile_size
 
+export (Texture) var cursor
+
 
 var moves = Array()
 var selected_tile = null
@@ -16,6 +18,9 @@ onready var layout_node = get_node("Layout")
 
 func _ready():
 	set_process(true)
+	
+	Input.set_custom_mouse_cursor(cursor)
+	start()
 
 func _process(delta):
 	pass
@@ -58,6 +63,8 @@ func load_layout(layout_name):
 	
 	
 	
+	print(layout["tiles"][0])
+	print(layout["tiles"][1])
 	layout["tiles"].sort_custom(sorter, "sort_layout")
 	print(layout["tiles"][0])
 	print(layout["tiles"][1])
@@ -131,7 +138,7 @@ func _on_Tile_clicked(clicked_tile):
 		# Clicked on blocked tile, play fail sound.
 		pass
 	
-func _on_Start_button_up():
+func start():
 	load_layout("turtle")
 	
 	var shuffled_tiles = get_node("/root/Tiles").get_shuffled_tiles()
@@ -158,3 +165,7 @@ func _on_Undo_button_up():
 func _on_Second_timeout():
 	counter_time += 1
 	update_labels()
+
+
+func _on_Restart_button_up():
+	get_tree().change_scene("res://Game.tscn")

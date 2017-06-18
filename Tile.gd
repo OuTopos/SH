@@ -167,9 +167,9 @@ func visual_animate_place(time, delay = 0):
 	
 func visual_animate_remove(time, delay = 0):
 	var pos = get_translation()
-	var poop = Vector2(pos.x*randf()*0.5, pos.z*randf()*0.5).normalized() * Vector2(25, 25)
+	var poop = Vector2(pos.x*randf()*0.5, pos.z*randf()*0.5).normalized() * Vector2(30, 30)
 	
-	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), Vector3(poop.x, 20, poop.y), time, Tween.TRANS_QUINT, Tween.EASE_IN, delay)
+	tween_node.interpolate_property(visual_node, "transform/translation", visual_node.get_translation(), Vector3(poop.x, 10, poop.y), time, Tween.TRANS_QUINT, Tween.EASE_IN, delay)
 	tween_node.interpolate_property(visual_node, "transform/rotation", visual_node.get_rotation(), get_visual_rotation(), time, Tween.TRANS_QUINT, Tween.EASE_IN, delay)
 	tween_node.start()
 
