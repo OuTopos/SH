@@ -4,7 +4,6 @@ onready var tile_size  = get_node("/root/Tiles").tile_size
 
 export (Texture) var cursor
 
-
 var moves = Array()
 var selected_tile = null
 var counter_tile = 0
@@ -13,13 +12,15 @@ var counter_click = 0
 var counter_move = 0
 var counter_undo = 0
 
-var tile_scene = preload("res://Tile.tscn")
+var tile_scene = preload("res://Game modes/Mahjong Solitaire/Tile.tscn")
 onready var layout_node = get_node("Layout")
 
 func _ready():
 	set_process(true)
+	print(get_shuffled_symbols(1337))
+	print(get_shuffled_symbols(1337))
 	
-	Input.set_custom_mouse_cursor(cursor)
+	#Input.set_custom_mouse_cursor(cursor)
 	start()
 
 func _process(delta):
@@ -36,8 +37,28 @@ func update_labels():
 	get_node("PanelContainer/VBoxContainer/HBoxContainer/Counter Move").set_text("Moves: " + str(counter_move))
 	get_node("PanelContainer/VBoxContainer/HBoxContainer/Counter Undo").set_text("Undos: " + str(counter_undo))
 
+func get_shuffled_symbols(new_seed = null):
+	if new_seed:
+		seed(new_seed)
+	else:
+		randomize()
+	
+	var symbols = []
+	for i in range(36):
+		symbols.append(i)
+		symbols.append(i)
+		symbols.append(i)
+		symbols.append(i)
+	
+	var shuffled_symbols = []
+	for i in range(symbols.size()):
+		var r = randi()%symbols.size()
+		shuffled_symbols.append(symbols[r])
+		symbols.remove(r)
+	return shuffled_symbols
+
 class sorter:
-	func sort_layout(tile_a, tile_b):
+	static func sort_layout(tile_a, tile_b):
 		if tile_a.y < tile_b.y:
 			return true
 		elif tile_a.y > tile_b.y:
@@ -58,16 +79,11 @@ func load_layout(layout_name):
 	var json = file.get_as_text()
 	var layout = Dictionary()
 	layout.parse_json(json)
-	var tiles = layout["tiles"]
 	file.close()
 	
-	
-	
-	print(layout["tiles"][0])
-	print(layout["tiles"][1])
 	layout["tiles"].sort_custom(sorter, "sort_layout")
-	print(layout["tiles"][0])
-	print(layout["tiles"][1])
+	
+	var shuffled_symbols = get_shuffled_symbols(1337)
 	
 	var i = 0
 	for tile in layout["tiles"]:
@@ -77,23 +93,21 @@ func load_layout(layout_name):
 		tile_node.connect("clicked", self, "_on_Tile_clicked")
 		layout_node.add_child(tile_node)
 		
-		
+		var translation = Vector3(tile.x * tile_size.x, tile.y * tile_size.y, tile.z * tile_size.z)
 		var delay = i * 0.01
+		tile_node.action_place(shuffled_symbols[i], translation, delay)
+		
 		i += 1
-		tile_node.place(Vector3(tile.x * tile_size.x, tile.y * tile_size.y, tile.z * tile_size.z), delay)
-		
-		
-		#tile_node.hide()
 		
 	counter_tile = layout_node.get_child_count()
 
 func select_tile(tile):
-	tile.set_selected(true)
+	tile.selected = true
 	selected_tile = tile
 
 func deselect_tile():
 	if selected_tile:
-		selected_tile.set_selected(false)
+		selected_tile.selected = false
 		selected_tile = null
 	
 
@@ -111,17 +125,17 @@ func _on_Tile_clicked(clicked_tile):
 			# Clicked on already selected tile, deselect it.
 			deselect_tile()
 		
-		elif clicked_tile.value == selected_tile.value:
+		elif clicked_tile.symbol == selected_tile.symbol:
 			counter_move += 1
 			var move = [selected_tile, clicked_tile]
 			moves.append(move)
 			counter_tile -= 2
 			# Found a match, remove both.
-			clicked_tile.deactivate()
-			selected_tile.deactivate()
+			clicked_tile.action_match()
+			selected_tile.action_match()
 			selected_tile = null
 			# Update blocked status
-			get_tree().call_group(0, "Tiles", "update_blocked")
+			get_tree().call_group(0, "Tiles", "raycast")
 			
 			update_labels()
 		else:
@@ -140,25 +154,17 @@ func _on_Tile_clicked(clicked_tile):
 	
 func start():
 	load_layout("turtle")
-	
-	var shuffled_tiles = get_node("/root/Tiles").get_shuffled_tiles()
-	print(shuffled_tiles)
-	var i = 0
-	for child in get_node("Layout").get_children():
-		var value = shuffled_tiles[i]
-		child.set_value(value)
-		i += 1
 
 
 func _on_Undo_button_up():
 	if moves.size() > 0:
 		counter_undo += 1
-		moves.back()[0].activate()
-		moves.back()[1].activate()
+		moves.back()[0].action_undo()
+		moves.back()[1].action_undo()
 		moves.remove(moves.size()-1)
 		counter_tile += 2
 		deselect_tile()
-		get_tree().call_group(0, "Tiles", "update_blocked")
+		get_tree().call_group(0, "Tiles", "raycast")
 		update_labels()
 
 

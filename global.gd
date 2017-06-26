@@ -10,4 +10,4 @@ func _ready():
 	pass
 
 func transition_to_game():
-	get_tree().change_scene("res://Game.tscn")
+	get_tree().change_scene("res://Game modes/Mahjong Solitaire/Game.tscn")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=43 format=1]
 
-[ext_resource path="res://Tile.gd" type="Script" id=1]
+[ext_resource path="res://Game modes/Mahjong Solitaire/Tile.gd" type="Script" id=1]
 [ext_resource path="res://Tiles/Blank.png" type="Texture" id=2]
 [ext_resource path="res://Tiles/00.png" type="Texture" id=3]
 [ext_resource path="res://Tiles/01.png" type="Texture" id=4]
@@ -44,7 +44,7 @@
 
 extents = Vector3( 1.3, 0.95, 1.7 )
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
@@ -199,7 +199,7 @@ axis = 2
 flags/transparent = true
 flags/shaded = false
 flags/alpha_cut = 0
-frames = SubResource( 4 )
+frames = SubResource( 2 )
 animation = "default"
 
 [node name="MeshInstance" type="MeshInstance" parent="Visual"]
