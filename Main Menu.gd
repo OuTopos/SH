@@ -13,4 +13,4 @@ func _ready():
 func _on_Button_button_up():
 #	print("starting game")
 #	global_node.fade_to("res://Game modes/Mahjong Solitaire/Game.tscn")
-	loading_screen.goto_scene("res://Game modes/Mahjong Solitaire/Game.tscn")
+	loading_screen.load_scene("res://Game modes/Mahjong Solitaire/Game.tscn")

@@ -17,8 +17,6 @@ onready var layout_node = get_node("Layout")
 
 func _ready():
 	set_process(true)
-	print(get_shuffled_symbols(1337))
-	print(get_shuffled_symbols(1337))
 	
 	#Input.set_custom_mouse_cursor(cursor)
 	start()
